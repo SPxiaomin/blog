@@ -212,7 +212,7 @@ exports.createResolver = function(options) {
 webpack5已经可以支持array alias解析了，但是目前beta阶段如果升4->5，对项目的风险来说更大，所以只能寻求在webpack4的基础上支持array解析，从前面的源码分析应该知道webpack进行模块解析的功能都是插件支持的，所以只要将webpack5中使用的插件搬过来就好了，前提当然是要对相关的插件源码进行审核了，整体的流程如下.
 
 ```
-// 解析 '@/index.js' # alias @=path.resolve(__dirname, src)
+// 解析 '@/index.js'
 // 主要解析发生在AliasPluginNew，这个插件会遍历alias数组，将 alias & 路径拼接起来，然后继续走下面的插件判断文件是否存在，一个个校验.
 
 // webpack.config.js
@@ -281,7 +281,6 @@ module.exports = {
                 * JoinRequestPlugin.「相对路径解析join，就是发生在这里」
                     * after-described-resolve.
                     * relative.
-￼
                     *  
                     * DescriptionFilePlugin.
                         * relative.
